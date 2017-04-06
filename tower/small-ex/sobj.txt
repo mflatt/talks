@@ -1,0 +1,25 @@
+
+<obj> = { <id> = <rhs> ... }
+
+<rhs> = [ <expr> ; ... <expr> ]
+      | <expr> ;
+
+<expr> = this
+       | <num> 
+       | <expr>.<id>
+       | <expr>.<id> = <expr>
+       | <expr> + <expr>
+       | <obj>
+
+------------------------------------------------------------
+
+{
+  o = {
+        x = 2;
+        y = 3;
+        f = [ this.arg = this.arg + this.x;
+              this.arg + this.y ]
+      };
+  main = [ this.o.arg = this.o.y;
+           this.o.f ]
+}

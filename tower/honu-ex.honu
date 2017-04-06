@@ -1,0 +1,8 @@
+#lang honu
+
+fun f (x) {
+  x + x
+}
+
+f(2)
+

@@ -1,0 +1,30 @@
+#lang racket/base
+(require racket/class
+         racket/draw)
+
+(define (clean src dest)
+  (let ([bm (read-bitmap src #:backing-scale 2)])
+    (define (find-nonwhite x y dx dy)
+      (define c (new color%))
+      (send (send bm make-dc) get-pixel x y c)
+      (if (and ((send c red) . > . 250)
+               ((send c green) . > . 250)
+               ((send c blue) . > . 250))
+          (add1 (find-nonwhite (+ x dx) (+ y dy) dx dy))
+          0))
+    (define w (send bm get-width))
+    (define h (send bm get-height))
+    (define dt (find-nonwhite (quotient w 2) 0 0 1))
+    (define db (find-nonwhite (quotient w 2) (sub1 h) 0 -1))
+    (define dl (find-nonwhite 0 (quotient h 2) 1 0))
+    (define dr (find-nonwhite (sub1 w) (quotient h 2) -1 0))
+    (define bm2 (make-bitmap (- w dl dr) (- h dt db)))
+    (send (send bm2 make-dc) draw-bitmap bm (- dl) (- dt))
+    (when (file-exists? dest)
+      (delete-file dest))
+    (send bm2 save-file dest 'png)))
+
+(clean "drscheme-53.png" "../dr53.png")
+(clean "drscheme-53-error.png" "../dr53-err.png")
+(clean "drscheme-53-config.png" "../dr53-cfg.png")
+

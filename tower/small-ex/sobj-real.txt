@@ -1,0 +1,16 @@
+<prog> = <obj>
+
+<obj> = { <id> = <rhs> ... }
+
+<rhs> = [ <stmt> ; ... <expr> ]
+      | <expr> ;
+
+<stmt> = <expr>.<id> = <expr>
+
+<expr> = <expr> + <expr>
+       | <oexpr>
+
+<expr> = this
+       | <num> 
+       | <expr>.<id>
+       | <obj>

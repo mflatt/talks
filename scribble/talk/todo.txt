@@ -1,0 +1,27 @@
+
+* typed-scribble
+
+* tweak interaction with PDF viewer ?
+
+Before talk:
+------------
+
+* Prep browser with main docs
+
+* Prep PDF Guide
+
+* Prep PDF paper
+
+* Prep HTML paper
+
+* Prep DrScheme (initial buffer as file)
+
+* Prep command line
+
+* Prep castle section
+
+* Prep castle module
+
+* Prep defclass use "button-class.scrbl" & rendering "button%"
+
+* Prep typed-scribble ?
