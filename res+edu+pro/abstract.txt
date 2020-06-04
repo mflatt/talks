@@ -1,0 +1,22 @@
+Title: A Racket Perspective on Research, Education, and Production
+
+Abstract:
+
+It's natural to think of research, education, and production as having
+competing goals. In programming-language design, for example, the needs
+of beginning students can differ greatly from the needs of practicing
+programmers, while research may explore ideas that are not yet worked
+out enough for either audience. With a shift in perspective, however,
+we can not only balance these goals but have them reinforce each other.
+The developers of Racket have integrated all three directions from the
+beginning (and now for 24 years). We'll talk about opportunities,
+challenges, results, and outlook based on that experience.
+
+Bio:
+
+Matthew Flatt is a professor in the School of Computing at the
+University of Utah, where he works on extensible programming
+languages, run-time systems, and applications of functional
+programming. He is one of the developers of the Racket programming
+language and a co-author of the introductory programming textbook _How
+to Design Programs_. He received his PhD from Rice University in 1999.

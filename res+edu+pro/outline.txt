@@ -1,0 +1,184 @@
+* 24-years story
+
+    - the same project over 24 years... but not the same
+
+* Why it works
+
+    - at a univesrsity
+    - with a deliberate integrate of research + education + production
+    - taking advantage of Racket as a LOP language
+
+   This is mostly an experience report. We'll start with a breif
+   discussion of how research, education, and production differ, segue
+   to an explanation of the university context, and then mostly look
+   at Racket history as examples of integrating research, education,
+   and production.
+
+* Venn diagram
+
+   Racket sits at the intersection (as do some others). To some degree,
+   the three areas have different and opposing requirements.
+
+* Academic context
+
+   The job of a professor is not quite what most non-academics think
+   it is. It's also not designed to support production. Part of this
+   experience report is explaining how we manage that tension, too.
+
+     - academia does at least accomodate different styles
+
+     - it's already well set up to combine research and teaching;
+       that's the whole point of a research university
+
+     - software counts, but not much; academics expect to count the
+       value of software by the number of papers that are written
+       about it; on the plus side, being able to refer to a "real"
+       system gives a paper a better chance in review
+
+    - production software is a great source of research; in a
+      production setting, a hard programming problem is an obstacle,
+      but it's an opportunity in an academic context
+
+  The point here is that our context in some ways sets us up to
+  succeed, and in some ways sets us up to fail. It affects the kinds
+  of problems problems we work on and how we approach them.
+
+* LOP
+
+  In the context of Racket specifically, we have an extra secret
+  ingredient. LOP is a partial technical solution for balancing and
+  integrating research, education, and production.
+
+* History
+
+    - HtDP + DrScheme
+        + for education
+        + mostly a production task at first
+        + decision to build in Scheme set the rest in motion
+          (remember: 1995 is when Java was first becoming available)
+          => immediately ran into need for modularity in Scheme
+
+    - Units and mixins
+        + needed modularity => units
+        + GUI modularity => mixins
+        + needed to tame teaching-language design => unit/lang
+
+        With several papers and a couple of dissertations, if it were
+        just a teaching+research project, it would have been done, and
+        we would have been settled into our conclusions. But
+        continuning to push on practice showed that we didn't have it
+        right.
+
+    - Modules and macros
+        + unit explicit links unweildy; stratification of compile time
+          and run time had good properties, but also difficult to work
+          with and coarse-grained
+        + so, modules
+        + and #lang
+
+    - Contracts and types
+        + now that we're scaling up, run into interface problems...
+        + manual checks so tedious that many didn't bother writing them
+        + higher-order checks painful enough that no one wrote them
+        + contracts solve ths problem: a declarative sublanguage that
+          nailed the problem of blame
+
+        + why stop with dynamic checks? how about types?
+        + yes, this led to TR --- but let me back up, because this
+          is hardly the first point where anyone thought about
+          applying types to Scheme programs
+
+        + Fagan's soft typing: not expressive enough in practice
+        + Wright's improved soft typing: good enough for some student
+          programs, but too many Scheme programs fell outside the
+          type system
+        + Flanagan's SBA: new kind of analysis, much more successful
+          at reporting the source of problems, and genuinely useful
+          to students --- but whole program, so not as useful to the
+          Racket code base
+        + Meunier's modular SBA: enabled by modules and contracts;
+          this was progress, but starting from boundary contracts
+          instead of types still left too much uncovered
+        + Tobin-Hochstadt's RT using occurrence: yet another model
+          of types that fits Scheme better than predecessors; uses
+          contracts to mediate with untyped (so modular) but more
+          fine-grained enabled success within a module; and acually
+          worked for the Racket code base, now widely used
+
+        Modules provoke and enable contracts with provoke and enable
+        TR which stresses the module+macro system which enabled TR and
+        contracts which stress each other.... A virtuous cycle of
+        research and production, exactly how it's supposed to work.
+
+    - More production
+
+      It's not always so ideal. The production goal sometimes requires
+      plain old engineering with little to no research payoff:
+
+          + FFI
+          + JIT
+          + GUI rewrite (seemed like a big project at the time)
+          + Math and plot (but written to emnable research, and has
+                           enabled other)
+          + Packaging and distribution
+          + Documentation... a particular cautionary tale, and one
+            that I learned from
+
+    - Macros and scope sets
+
+      There are more times that it did work. Applications pushing on
+      the macro system led to "basic research" on binding and scopes.
+
+      And a reimplementation to get out of C(!?). In fact, that new
+      implementation sgarted as a teaching exercise, for students and
+      specifically for a StarengLoop talk proposal. So, yet again,
+      education drove a production improvements.
+
+    - Racket on Chez
+
+      Replacing the expander worked so well that we decided to throw
+      out most of the other C code.
+
+      Shuffling boxes makes it look easy. This was a massive
+      implementation effort with relatively little publication
+      potential --- the sort of work that you're not supposed to do in
+      academia. Ironically, probably only a senior professor could
+      make this work, and probably only one who learned his lesson
+      from Scribble.
+
+      But this rewrite also pull in even more of a history of
+      research, education, and production in Chez Scheme.
+      Specifically, one of the parts that makes Chez Scheme a nice
+      base for Racket is its nanopass compiler.
+
+    - Rhombus
+
+      Time for the pendulum to swing back towards research and design:
+      a better language to use, and a better language for building
+      languages.
+
+      + better data structures
+      + better support for non-() syntax, and the only way that's
+        going to be real is if we bring it fully into our production
+        and research feedback loop
+
+* Conclusion
+
+  Takeaways from this experience report:
+  
+      + If you're an academic, maybe some points of comparison and
+        hints about how to make the system work
+
+      + If you're a consumer of academic output, hopefully a better
+        understanding of the pressures that shape software development
+        in academia, even when there's a strong commitment to
+        production
+
+      + If you're a programmer that feels no connection to academia,
+        you still have to balance everyday development versus new and
+        exciting things versus spending time explaining and learning
+        how to explain; maybe these examples can be inspiring or at
+        least encouraging
+
+  The Racket community will continue to turn our LOP,
+  research--education--production mixing crank to move Racket forward.
